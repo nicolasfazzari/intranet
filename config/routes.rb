@@ -8,11 +8,13 @@ Rails.application.routes.draw do
         end
     end
   end
+  resources :indicators do
+    collection { post :sort }
+  end 
   resources :documentations
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :kpis
   devise_for :users
-  resources :indicators
   root "indicators#index"
 
 end

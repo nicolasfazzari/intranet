@@ -12,6 +12,8 @@
 //
 //= require jquery-3.1.0.min
 //= require jquery-ui
+//= require jquery-ui/widget
+//= require jquery-ui/sortable
 //= require jquery_ujs
 //= require dataTables.min
 //= require highcharts/highcharts

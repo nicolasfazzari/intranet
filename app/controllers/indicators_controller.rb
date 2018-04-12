@@ -1,13 +1,13 @@
 class IndicatorsController < ApplicationController
 	before_filter :must_be_admin, only: [:new,:create,:edit,:update,:destroy]
 	def index
-		@indicators = Indicator.all.order('created_at DESC')
+		@indicators = Indicator.all.order(:position)
 
 		if params[:category].blank?
-			@indicators = Indicator.all.order('created_at DESC')
+			@indicators = Indicator.all.order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where(category_id: @category_id).order('created_at DESC')
+			@indicators = Indicator.where(category_id: @category_id).order(:position)
 		end
 
 
@@ -51,6 +51,14 @@ class IndicatorsController < ApplicationController
 		
 		@documentations = Documentation.all
 	end
+
+	def sort 
+	    params[:indicator].each_with_index do |id, index|
+	        Indicator.where(id: id).update_all(position: index + 1)
+	    end 
+
+	    head :ok
+	end 
 
 	def new
 		@indicator = Indicator.new
@@ -107,3 +115,5 @@ class IndicatorsController < ApplicationController
 			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id)
 		end
 end
+
+
