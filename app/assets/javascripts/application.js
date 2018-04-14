@@ -14,7 +14,6 @@
 //= require jquery-ui
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
-//= require jquery.ui.touch-punch
 //= require jquery_ujs
 //= require dataTables.min
 //= require highcharts/highcharts
