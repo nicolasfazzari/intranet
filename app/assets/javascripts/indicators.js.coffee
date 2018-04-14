@@ -1,4 +1,5 @@
 jQuery ->
+$(document).on "turbolinks:load", ->
   $('#indicators').sortable
     handle: '.handle'
     update: ->

@@ -49,6 +49,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'chosen-rails'
 
 gem 'acts_as_list'
+
+gem 'touchpunch-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
