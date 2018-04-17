@@ -19,16 +19,46 @@ class IndicatorsController < ApplicationController
 					  
 					  	serie = (indicator.data.split("\n"))
 					  	x = serie.first.split(',').map(&:to_s)
+					  
 					  	serie.drop(1).each do |serie|
-					  		data= serie.split(',').map(&:to_f).drop(1)
+					  		tampon = serie.split('|').first
+					  		data= tampon.split(',').map(&:to_f).drop(1)
 					  		name= serie.split(',').map(&:to_s).first
-					  		graph = indicator.graph.split('_').map(&:to_s).last
-					  		if (name.upcase=='OBJECTIF' || name.upcase=='BUDGET')
-					  			puts f.series(type: 'line', name: name , yAxis: 0, data: data, color: '#ff5050')
-					  		else 
-					  			puts f.series(name: name , yAxis: 0, data: data)
-					  		end
-					  		
+
+
+					  		options = serie.split('|').last
+					  		option = options.split(',').map(&:to_s)
+					  	
+						  		graph = indicator.graph.split('_').map(&:to_s).last
+						  			
+						  			if (name.upcase=='OBJECTIF' || name.upcase=='BUDGET')
+						  				puts f.series(type: 'line', name: name , yAxis: 0, data: data, color: '#ff5050')
+						  			else
+
+							  			if option.any? { |e| e.include? 'type'}
+							  				puts f.series(name: name, yAxis: 0, data: data, type: option.find{ |str| str.include?('type')}.split(':').map(&:to_s).last) 
+							  			else
+
+								  			if option.any? { |e| e.include? 'stack'}
+								  				puts f.series(name: name, yAxis: 0, data: data, stack: option.find{ |str| str.include?('stack')}.split(':').map(&:to_s).last) 
+								  			else
+
+									  			if option.any? { |e| e.include? 'stack'} && option.any? { |e| e.include? 'type'}
+									  				puts f.series(name: name, yAxis: 0, data: data, stack: option.find{ |str| str.include?('stack')}.split(':').map(&:to_s).last, type: option.find{ |str| str.include?('type')}.split(':').map(&:to_s).last) 
+									  			else
+						  							puts f.series(name: name , yAxis: 0, data: data)
+						  						end
+						  					end
+						  				end
+						  			end
+						  					
+						  				
+						  				
+						  				
+
+						  			
+					
+					  	  		
 					  	end
 
 					  	if (indicator.graph == "stacked_bar") || (indicator.graph =="stacked_column") || (indicator.graph =="stacked_area")
