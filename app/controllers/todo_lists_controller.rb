@@ -9,7 +9,7 @@ class TodoListsController < ApplicationController
   # GET /todo_lists/1.json
   def show
     if params[:tag]
-      @todo_item = @todo_list.todo_items.tagged_with(params[:tag])
+      @todo_item = @todo_list.todo_items.tagged_with(params[:tag]).where(efficiency: nil)
    # elsif params[:view] == "Assess"
     #  @todo_item = @todo_list.todo_items.where.not(completed_at: nil).where(efficiency: nil)
     elsif params[:view] == "History"

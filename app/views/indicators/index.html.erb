@@ -2,7 +2,7 @@
 	<section id="main-content">
 		 <div class="row">
 		 	<div class="col-md-10">
-		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> Filter :</i></span>
+		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> Categories :</i></span>
 		 		<%= link_to "All", indicators_path, :class => "btn btn-primary" %>
 			 	<% Category.all.each do |category| %>
 			 		<%= link_to category.name, indicators_path(category: category.name), :class => "btn btn-primary" %>
