@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818125844) do
+ActiveRecord::Schema.define(version: 20180818130945) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -59,14 +59,15 @@ ActiveRecord::Schema.define(version: 20180818125844) do
   create_table "indicators", force: :cascade do |t|
     t.string   "name"
     t.text     "data"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "type"
     t.string   "graph"
     t.string   "xaxis"
     t.string   "yaxis"
     t.integer  "category_id"
     t.integer  "position"
+    t.integer  "department_id"
   end
 
   create_table "kpis", force: :cascade do |t|
