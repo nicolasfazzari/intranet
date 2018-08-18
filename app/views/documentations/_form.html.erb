@@ -17,8 +17,8 @@
               </div>
               <% end %>
              <p>
-                <%= f.label :category %>
-                <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Choose a category"}, { :class => 'form-control' } %>
+                <%= f.label :departement %>
+                <%= f.collection_select :department_id, Category.all, :id, :name, {prompt: "Choose a department"}, { :class => 'form-control' } %>
               </p>
                <p>
                   <%= f.label :doc %><br>

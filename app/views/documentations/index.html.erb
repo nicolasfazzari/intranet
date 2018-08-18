@@ -5,8 +5,8 @@
                     <div class="col-md-12">
                       <span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> Filter :</i></span>
                       <%= link_to "All", documentations_path, :class => "btn btn-primary" %>
-                      <% Category.all.each do |category| %>
-                        <%= link_to category.name, documentations_path(category: category.name), :class => "btn btn-primary" %>
+                      <% Department.all.each do |department| %>
+                        <%= link_to department.name, documentations_path(department: department.name), :class => "btn btn-primary" %>
                       <% end %>
                       <br>  <br>
                     </div>
@@ -46,7 +46,7 @@
                                 <tbody>
                                     <% @documentations.each do |documentation| %>
                                     <tr>
-                                      <td><%= documentation.category.name %></td>
+                                      <td><%= documentation.department.name %></td>
                                       <td><%= documentation.doc %></td>
                                       <td><%= documentation.title %></td>
                                       <td><%= File.extname(documentation.file.url).strip.downcase[1..-1].partition("?").first%></td>
