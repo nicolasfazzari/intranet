@@ -1,13 +1,13 @@
 class IndicatorsController < ApplicationController
 	before_filter :authenticate_user!, only: [:index,:show]
 	def index
-		@indicators = Indicator.where('user_id LIKE ? or public LIKE ?', current_user, true).order(:position)
+		@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 
 		if params[:category].blank?
-			@indicators = Indicator.where('user_id LIKE ? or public LIKE ?', current_user, true).order(:position)
+			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where('user_id LIKE ? and category_id LIKE ? or public LIKE ?', current_user, @category_id, true).order(:position)
+			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ?', current_user, @category_id, true).order(:position)
 		end
 
 		@kpis = Kpi.all
