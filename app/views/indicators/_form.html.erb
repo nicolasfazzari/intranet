@@ -1,9 +1,4 @@
-				<div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> Indicator</h4>
-                </div>
-                <div class="modal-body">
-                    <%= form_for @indicator do |f| %>
+				<%= form_for @indicator do |f| %>
 							<% if @indicator.errors.any? %>
 								<div id="errors">
 									<h2><%= pluralize(@indicator.errors.count, "error") %> prevented this indicator from saving</h2>
@@ -14,9 +9,18 @@
 									</ul>
 								</div>
 							<% end %>
-							
-								<%= f.check_box :public, data: {toggle: 'toggle', style: 'ios', size: 'small', on:'Public', off:'Private', onstyle:"primary", offstyle:"danger"}%>
-							
+
+
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"> Indicator</h4>
+                </div>
+
+                <div class="modal-body">
+                
+							<p>	
+                    		 <%= f.check_box :public, data: {toggle: 'toggle', size: 'small', on:'Public', off:'Private', onstyle:"primary", offstyle:"danger"} %>
+                    		</p>
 							<p>
 								<%= f.label :category %>
 								<%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Choose a category"}, { :class => 'form-control' } %>

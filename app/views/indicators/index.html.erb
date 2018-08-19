@@ -70,7 +70,7 @@
 									       
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %> <%= indicator.category.name %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %> <%= indicator.category.name %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">
@@ -105,7 +105,7 @@
 									                   	  
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %> <%= indicator.category.name %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %> <%= indicator.category.name %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">

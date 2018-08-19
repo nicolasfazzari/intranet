@@ -1,14 +1,15 @@
 class IndicatorsController < ApplicationController
-	before_filter :authenticate_user!, only: [:index,:show]
+	before_filter :must_be_admin, only: [:new,:create,:edit,:update,:destroy]
 	def index
-		@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
+		@indicators = Indicator.all.order(:position)
 
 		if params[:category].blank?
-			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
+			@indicators = Indicator.all.order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ?', current_user, @category_id, true).order(:position)
+			@indicators = Indicator.where(category_id: @category_id).order(:position)
 		end
+
 
 		@kpis = Kpi.all
 		@charts=[]
@@ -55,9 +56,7 @@ class IndicatorsController < ApplicationController
 						  				
 						  				
 
-						  			
-					
-					  	  		
+					  		
 					  	end
 
 					  	if (indicator.graph == "stacked_bar") || (indicator.graph =="stacked_column") || (indicator.graph =="stacked_area")
@@ -90,11 +89,11 @@ class IndicatorsController < ApplicationController
 	end 
 
 	def new
-		@indicator = current_user.indicators.build
+		@indicator = Indicator.new
 	end
 
 	def create
-		@indicator = current_user.indicators.build(indicator_params)
+		@indicator = Indicator.new(indicator_params)
 		if @indicator.save
 			redirect_to root_path
 		else
@@ -119,7 +118,7 @@ class IndicatorsController < ApplicationController
 	def update
 		@indicator = Indicator.find(params[:id])
 
-		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public))
+		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id))
 			redirect_to root_path
 		else
 			redirect_to root_path
@@ -141,7 +140,7 @@ class IndicatorsController < ApplicationController
 
 	private
 		def indicator_params
-			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id,:public)
+			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id)
 		end
 end
 
