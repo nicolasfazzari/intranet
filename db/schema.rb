@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818130945) do
+ActiveRecord::Schema.define(version: 20180819145455) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -68,7 +68,11 @@ ActiveRecord::Schema.define(version: 20180818130945) do
     t.integer  "category_id"
     t.integer  "position"
     t.integer  "department_id"
+    t.integer  "user_id"
+    t.boolean  "public"
   end
+
+  add_index "indicators", ["user_id"], name: "index_indicators_on_user_id"
 
   create_table "kpis", force: :cascade do |t|
     t.string   "name"

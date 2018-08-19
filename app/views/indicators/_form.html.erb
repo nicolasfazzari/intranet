@@ -14,6 +14,9 @@
 									</ul>
 								</div>
 							<% end %>
+							
+								<%= f.check_box :public, data: {toggle: 'toggle', style: 'ios', size: 'small', on:'Public', off:'Private', onstyle:"primary", offstyle:"danger"}%>
+							
 							<p>
 								<%= f.label :category %>
 								<%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Choose a category"}, { :class => 'form-control' } %>
@@ -34,6 +37,7 @@
 								<%= f.label :data %><br>
 								<%= f.text_area :data, :placeholder => "Entrer les données", :class=>"form-control", :style=>"min-height: 100px;" %>
 							</p>     
+							
 			                <div class="modal-footer">
 			                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			                   <%= f.submit :class=>"btn btn-primary"  %>
@@ -42,4 +46,5 @@
 				</div>
 
 
-							                                	
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>

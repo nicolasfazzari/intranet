@@ -1,15 +1,14 @@
 class IndicatorsController < ApplicationController
-	before_filter :must_be_admin, only: [:new,:create,:edit,:update,:destroy]
+	before_filter :authenticate_user!, only: [:index,:show]
 	def index
-		@indicators = Indicator.all.order(:position)
+		@indicators = Indicator.where('user_id LIKE ? or public LIKE ?', current_user, true).order(:position)
 
 		if params[:category].blank?
-			@indicators = Indicator.all.order(:position)
+			@indicators = Indicator.where('user_id LIKE ? or public LIKE ?', current_user, true).order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where(category_id: @category_id).order(:position)
+			@indicators = Indicator.where('user_id LIKE ? and category_id LIKE ? or public LIKE ?', current_user, @category_id, true).order(:position)
 		end
-
 
 		@kpis = Kpi.all
 		@charts=[]
@@ -91,11 +90,11 @@ class IndicatorsController < ApplicationController
 	end 
 
 	def new
-		@indicator = Indicator.new
+		@indicator = current_user.indicators.build
 	end
 
 	def create
-		@indicator = Indicator.new(indicator_params)
+		@indicator = current_user.indicators.build(indicator_params)
 		if @indicator.save
 			redirect_to root_path
 		else
@@ -120,7 +119,7 @@ class IndicatorsController < ApplicationController
 	def update
 		@indicator = Indicator.find(params[:id])
 
-		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id))
+		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public))
 			redirect_to root_path
 		else
 			redirect_to root_path
@@ -142,7 +141,7 @@ class IndicatorsController < ApplicationController
 
 	private
 		def indicator_params
-			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id)
+			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id,:public)
 		end
 end
 
