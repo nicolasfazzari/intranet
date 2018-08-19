@@ -1,13 +1,13 @@
 class IndicatorsController < ApplicationController
 	before_filter :must_be_admin, only: [:new,:create,:edit,:update,:destroy]
 	def index
-		@indicators = Indicator.all.order(:position)
+		@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 
 		if params[:category].blank?
-			@indicators = Indicator.all.order(:position)
+			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where(category_id: @category_id).order(:position)
+			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ?', current_user, @category_id, true).order(:position)
 		end
 
 
