@@ -1,5 +1,6 @@
 class IndicatorsController < ApplicationController
 	before_filter :must_be_admin, only: [:new,:create,:edit,:update,:destroy]
+	before_filter :authenticate_user!, only: [:index,:show]
 	def index
 		@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 
@@ -7,7 +8,7 @@ class IndicatorsController < ApplicationController
 			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 		else
 			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ?', current_user, @category_id, true).order(:position)
+			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ? and category_id = ? ', current_user, @category_id, true, @category_id).order(:position)
 		end
 
 
@@ -118,7 +119,7 @@ class IndicatorsController < ApplicationController
 	def update
 		@indicator = Indicator.find(params[:id])
 
-		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id))
+		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public))
 			redirect_to root_path
 		else
 			redirect_to root_path
@@ -140,7 +141,7 @@ class IndicatorsController < ApplicationController
 
 	private
 		def indicator_params
-			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id)
+			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id, :public)
 		end
 end
 
