@@ -70,7 +70,7 @@
 									       
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %> <%= indicator.category.name %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %> <button type="button" class="btn btn-xs"><%= indicator.category.name %></button> <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">
@@ -92,6 +92,7 @@
 																			<%= high_chart(('a'..'z').to_a.shuffle.join, @charts[@index]) %>
 																			<% @index += 1 %>
 																	</div>
+														
 																	<div class="pull-right">
 																		<p style="font-size:0.7em;">Updated at: <%= indicator.updated_at.strftime('%v') %></p>
 																	</div>
@@ -105,7 +106,7 @@
 									                   	  
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %> <%= indicator.category.name %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %> <button type="button" class="btn btn-xs"><%= indicator.category.name %></button> <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">
@@ -126,6 +127,7 @@
 																			<%= high_chart(('a'..'z').to_a.shuffle.join, @charts[@index]) %>
 																			<% @index += 1 %>
 																	</div>
+																
 																	<div class="pull-right">
 																		<p style="font-size:0.7em;">Updated at: <%= indicator.updated_at.strftime('%v') %></p>
 																	</div>
