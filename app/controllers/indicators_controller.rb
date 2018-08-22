@@ -119,7 +119,7 @@ class IndicatorsController < ApplicationController
 	def update
 		@indicator = Indicator.find(params[:id])
 
-		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public))
+		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public, :department_id))
 			redirect_to root_path
 		else
 			redirect_to root_path
@@ -141,7 +141,7 @@ class IndicatorsController < ApplicationController
 
 	private
 		def indicator_params
-			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id, :public)
+			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id, :public, :department_id)
 		end
 end
 
