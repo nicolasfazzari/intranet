@@ -3,14 +3,14 @@ class IndicatorsController < ApplicationController
 	before_filter :authenticate_user!, only: [:index,:show]
 	def index
 		@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
-
-		if params[:category].blank?
+		if  params[:tag].blank? && params[:department].blank? 
 			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
-		else
-			@category_id=Category.find_by(name: params[:category]).id
-			@indicators = Indicator.where('user_id = ? and category_id = ? or public = ? and category_id = ? ', current_user, @category_id, true, @category_id).order(:position)
-		end
-
+		elsif params[:tag] && params[:department].blank?
+    		@indicators = Indicator.tagged_with(params[:tag])
+    	else params[:department] && params[:tag].blank?
+     		@department_id=Department.find_by(name: params[:department]).id
+			@indicators = Indicator.where('user_id = ? and department_id = ? or public = ? and department_id = ? ', current_user, @department_id, true, @department_id).order(:position)
+   		end
 
 		@kpis = Kpi.all
 		@charts=[]
@@ -119,7 +119,7 @@ class IndicatorsController < ApplicationController
 	def update
 		@indicator = Indicator.find(params[:id])
 
-		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public, :department_id))
+		if @indicator.update(params[:indicator].permit(:name, :data, :graph, :xaxis, :yaxis, :category_id, :public, :department_id, :tag_list))
 			redirect_to root_path
 		else
 			redirect_to root_path
@@ -141,7 +141,7 @@ class IndicatorsController < ApplicationController
 
 	private
 		def indicator_params
-			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id, :public, :department_id)
+			params.require(:indicator).permit(:name, :data, :graph, :xaxis, :yaxis,:category_id, :public, :department_id, :tag_list)
 		end
 end
 

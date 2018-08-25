@@ -2,10 +2,10 @@
 	<section id="main-content">
 		 <div class="row">
 		 	<div class="col-md-10">
-		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> Categories :</i></span>
+		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-sitemap fa-1x"> Department:</i></span>
 		 		<%= link_to "All", indicators_path, :class => "btn btn-primary" %>
-			 	<% Category.all.each do |category| %>
-			 		<%= link_to category.name, indicators_path(category: category.name), :class => "btn btn-primary" %>
+			 	<% Department.all.each do |department| %>
+			 		<%= link_to department.name, indicators_path(department: department.name), :class => "btn btn-primary" %>
 			 	<% end %>
 			 	<br>	<br>
 		 	</div>
@@ -19,8 +19,20 @@
 				</div>
 		 	</div>
 		 </div>
-
-
+		 <div class="row">
+		 	<div class="col-md-10">
+				<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> tags :</i></span>
+				<%= link_to "All", indicators_path, :class => "btn btn-primary btn-xs" %>
+			 	<% if Indicator.tag_counts.length > 0 %>
+                <% tag_cloud @indicators.tag_counts, %w(css1 css2 css3 css4) do |tag| %>
+                    <span class="btn btn-primary btn-xs"><%= link_to tag.name, indicators_path(tag: tag.name), :style=>'color:#FFFFFF;'  %></span>
+                <% end %>
+              <% else -%>
+                <%= content_tag :p, 'No tags' %>
+              <% end %>
+			 </div>
+			 <br>	<br>
+		  </div>
 
 								    <div class="row">
 										<% @kpis.each.with_index do |kpi, index| %>
@@ -70,7 +82,7 @@
 									       
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %> <button type="button" class="btn btn-default btn-xs"><%= indicator.department.name %></button> <%= link_to indicator.category.name, indicators_path(category: indicator.category.name), :class => "btn btn-default btn-xs" %>  <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" ></i> <% end %><%= link_to indicator.department.name, indicators_path(department: indicator.department.name), :class => "btn btn-default btn-xs" %> <%= raw indicator.tag_list.map{|t| link_to t, indicators_path(tag: t), :class =>"btn btn-default btn-xs"}.join(' ')%> <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">
@@ -106,7 +118,7 @@
 									                   	  
 									                        <div class="panel panel-default">
 									                            <div class="panel-heading">
-									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %><button type="button" class="btn btn-default btn-xs"><%= indicator.department.name %></button> <%= link_to indicator.category.name, indicators_path(category: indicator.category.name), :class => "btn btn-default btn-xs" %> <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
+									                                <h5 class="panel-title"><% if current_user.admin? || indicator.user==current_user %><i class="fa fa-arrows-alt handle" style="cursor: move"></i> <% end %><%= link_to indicator.department.name, indicators_path(department: indicator.department.name), :class => "btn btn-default btn-xs" %> <%= raw indicator.tag_list.map{|t| link_to t, indicators_path(tag: t), :class =>"btn btn-default btn-xs"}.join(' ')%>  <% if indicator.public==true %><button type="button" class="btn btn-primary btn-xs">Public</button> <% else %><button type="button" class="btn btn-danger btn-xs">Private</button><% end %></h5>
 									                                <div class="actions pull-right">
 									                                	<% if indicator.user==current_user %>
 									                                	<div class="btn-group">

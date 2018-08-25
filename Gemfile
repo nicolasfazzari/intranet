@@ -44,7 +44,7 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-typeahead-rails'
 
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on', '~> 3.4', :git => 'https://github.com/F3pix/acts-as-taggable-on'
 
 gem 'chosen-rails'
 
