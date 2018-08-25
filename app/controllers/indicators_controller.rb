@@ -6,7 +6,7 @@ class IndicatorsController < ApplicationController
 		if  params[:tag].blank? && params[:department].blank? 
 			@indicators = Indicator.where('user_id = ? or public = ?', current_user, true).order(:position)
 		elsif params[:tag] && params[:department].blank?
-    		@indicators = Indicator.tagged_with(params[:tag])
+    		@indicators = Indicator.tagged_with(params[:tag]).where('user_id = ? or public = ?', current_user, true).order(:position)
     	else params[:department] && params[:tag].blank?
      		@department_id=Department.find_by(name: params[:department]).id
 			@indicators = Indicator.where('user_id = ? and department_id = ? or public = ? and department_id = ? ', current_user, @department_id, true, @department_id).order(:position)
