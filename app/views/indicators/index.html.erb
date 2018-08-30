@@ -2,10 +2,10 @@
 	<section id="main-content">
 		 <div class="row">
 		 	<div class="col-md-10">
-		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-sitemap fa-1x"> Department:</i></span>
-		 		<%= link_to "All", indicators_path, :class => "btn btn-primary" %>
+		 		<span style="color: #9eafba;text-decoration: none;font-size: 1.2em;"><i class="fa fa-sitemap fa-1x"> Department:</i></span>
+		 		<%= link_to "All", indicators_path, :class => "btn btn-primary btn-xs" %>
 			 	<% Department.all.each do |department| %>
-			 		<%= link_to department.name, indicators_path(department: department.name), :class => "btn btn-primary" %>
+			 		<%= link_to department.name, indicators_path(department: department.name), :class => "btn btn-primary btn-xs" %>
 			 	<% end %>
 			 	<br>	<br>
 		 	</div>
@@ -21,7 +21,7 @@
 		 </div>
 		 <div class="row">
 		 	<div class="col-md-10">
-				<span style="color: #9eafba;text-decoration: none;font-size: 1.5em;"><i class="fa fa-tag fa-1x"> tags :</i></span>
+				<span style="color: #9eafba;text-decoration: none;font-size: 1.2em;"><i class="fa fa-tag fa-1x"> tags :</i></span>
 				<%= link_to "All", indicators_path, :class => "btn btn-primary btn-xs" %>
 			 	<% if Indicator.tag_counts.length > 0 %>
                 <% tag_cloud @indicators.tag_counts, %w(css1 css2 css3 css4) do |tag| %>
