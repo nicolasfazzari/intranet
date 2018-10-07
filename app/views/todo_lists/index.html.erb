@@ -22,8 +22,10 @@
                                         <td width="10%" style="vertical-align: middle;text-align:center;"><%= todo_list.created_at.strftime('%v') %></td>
                                         <td width="15%" style="vertical-align: middle;text-align:center;">Completion with :<div class="progress"><div class="progress-bar progress-bar-primary" style="width:<%= (todo_list.todo_items.where.not(completed_at: nil).count.to_f / todo_list.todo_items.count.to_f * 100).to_i rescue 0 %>%"><%= (todo_list.todo_items.where.not(completed_at: nil).count.to_f / todo_list.todo_items.count.to_f * 100).to_i rescue 0 %>%</div></div></td>
                                         <td width="5%" style="vertical-align: middle;text-align:center;"><%= link_to todo_list, :class => "btn btn-primary" do %><i class="fa fa-search"> Show</i><% end %></td>
-                                        <td width="5%" style="vertical-align: middle;text-align:center;"><%= link_to edit_todo_list_path(todo_list),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-edit_list',:class => "btn btn-default"} do %><i class="fa fa-edit"> Edit</i><% end %></td>
-                                        <td width="5%" style="vertical-align: middle;text-align:center;"><%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-danger", :style=>'color:#FFFFFF;' do %><i class="fa fa-trash-o"> Delete</i><% end %></td>
+                                        <% if current_user.admin? %>
+                                          <td width="5%" style="vertical-align: middle;text-align:center;"><%= link_to edit_todo_list_path(todo_list),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-edit_list',:class => "btn btn-default"} do %><i class="fa fa-edit"> Edit</i><% end %></td>
+                                          <td width="5%" style="vertical-align: middle;text-align:center;"><%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-danger", :style=>'color:#FFFFFF;' do %><i class="fa fa-trash-o"> Delete</i><% end %></td>
+                                        <% end %>
                                       </tr>
                                     <% end %>
                                   </tbody>
