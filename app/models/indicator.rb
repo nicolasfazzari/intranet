@@ -3,11 +3,12 @@ class Indicator < ActiveRecord::Base
 	belongs_to :category
 	belongs_to :department
 	belongs_to :user
-	validates :category, presence: true
+	validates :department, presence: true
 	validates :name, presence: true
 	validates :data, presence: true
 	acts_as_list
 	acts_as_taggable
 	acts_as_taggable_on :tag_list
+
 
 end
