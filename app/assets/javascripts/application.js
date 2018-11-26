@@ -17,6 +17,7 @@
 //= require jquery_ujs
 //= require dataTables.min
 //= require highcharts/highcharts
+//= require highcharts/highcharts-more
 //= require bootstrap-datepicker
 //= require bootstrap-typeahead-rails
 //= require chosen-jquery
