@@ -18,6 +18,8 @@
 //= require dataTables.min
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
+//= require highcharts/modules/exporting
+//= require highcharts/modules/offline-exporting
 //= require bootstrap-datepicker
 //= require bootstrap-typeahead-rails
 //= require chosen-jquery
