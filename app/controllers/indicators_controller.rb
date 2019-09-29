@@ -75,6 +75,7 @@ class IndicatorsController < ApplicationController
 					  	else 
 					  		f.plotOptions(series: {dataLabels: {enabled: 'true'}})
 					  		f.yAxis [{title: {text: indicator.yaxis, margin: 70} },]
+
 					  	end
 					  	
 					  
@@ -91,6 +92,8 @@ class IndicatorsController < ApplicationController
 					  	f.title(text: indicator.name)
 					  	f.xAxis(categories: x)
 					    f.legend(align: 'center', verticalAlign: 'bottom', y: 0, x: 0, layout: 'horizontal')
+					   
+					    
 					  end
 			end
 			

@@ -36,7 +36,7 @@ gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 gem 'paperclip', '~> 4.2.1'
 
-gem 'aws-sdk', '< 2.0'
+# gem 'aws-sdk', '< 2.0'
 
 gem 'jquery-ui-rails'
 
