@@ -30,7 +30,7 @@ gem 'lazy_high_charts'
 
 gem "font-awesome-rails"
 
-gem 'rails_admin', '~> 1.2'
+gem 'rails_admin', '~> 1.4'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
