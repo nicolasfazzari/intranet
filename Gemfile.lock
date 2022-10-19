@@ -1,5 +1,12 @@
 GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
+  remote: https://github.com/F3pix/acts-as-taggable-on
+  revision: 7570774835cb9e391d0efb0c0dcbb971a55132c1
+  specs:
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 4.0)
+
+GIT
+  remote: https://github.com/rweng/jquery-datatables-rails.git
   revision: d486b31b192a2924b1913e080ad23460e6b96d31
   specs:
     jquery-datatables-rails (3.4.0)
@@ -7,13 +14,6 @@ GIT
       jquery-rails
       railties (>= 3.1)
       sass-rails
-
-GIT
-  remote: https://github.com/F3pix/acts-as-taggable-on
-  revision: 7570774835cb9e391d0efb0c0dcbb971a55132c1
-  specs:
-    acts-as-taggable-on (3.5.0)
-      activerecord (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -133,12 +133,13 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.8.0)
     minitest (5.10.3)
     multi_json (1.12.2)
     nested_form (0.3.2)
-    nokogiri (1.8.1)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.13.9)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     paperclip (4.2.4)
       activemodel (>= 3.2.0)
@@ -146,6 +147,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
     pg (0.20.0)
+    racc (1.6.0)
     rack (1.6.8)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
